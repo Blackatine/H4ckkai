@@ -35,8 +35,6 @@ This project is a Flask-based web application designed to function as a cybersec
 ## Usage
 
 - **Chat Endpoint**: Send POST requests to `/chat` with a JSON payload containing a `message` field.
-- **Create Order**: Send POST requests to `/create-order` to initiate a payment.
-- **Verify Payment**: Send POST requests to `/verify-payment` with Razorpay payment details.
 - **Get News**: Access `/api/news` to retrieve the latest cybersecurity news.
 
 ## Contributing
