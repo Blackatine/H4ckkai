@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cybersecurity Chatbot - Your AI Security Assistant">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <title>CyberSec Assistant</title>
+</head>
+<body class="dark-theme">
+    <canvas id="matrix-bg" class="matrix-bg"></canvas>
+
+    <!-- Fixed Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo">H4ckKai</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#news" class="nav-link">News</a>
+            <a href="#notes" class="nav-link">Notes</a>
+            <a href="#blog" class="nav-link">Blog</a>
+            <a href="#footer" class="nav-link">About</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section id="home" class="section">
+            <div class="welcome-section">
+                <h1 id="typing-title" class="typing-effect"></h1>
+                <div class="welcome-subtitle">Your Path to Cybersecurity Mastery</div>
+            </div>
+            
+            <!-- Chatbot Section -->
+            <div class="chatbot-wrapper">
+                <div class="chatbot-container">
+                    <div class="chat-header">
+                        <h2 class="chat-title">CyberSec Assistant v2.0</h2>
+                        <div class="header-controls">
+                            <button class="command-button" data-action="CLEAR" title="Clear Chat">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button class="command-button" data-action="EXPORT" title="Export Chat History">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages"></div>
+                    
+                    <div class="quick-commands">
+                        <button class="command-button" data-command="/help">Help</button>
+                        <button class="command-button" data-command="/topics">Topics</button>
+                        <button class="command-button" data-command="/network">Network Security</button>
+                        <button class="command-button" data-command="/malware">Malware Analysis</button>
+                        <button class="command-button" data-command="/encryption">Encryption</button>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <div class="input-wrapper">
+                            <span class="prompt">&gt;</span>
+                            <input type="text" class="chat-input" 
+                                   placeholder="Type your cybersecurity question here..."
+                                   autocomplete="off">
+                        </div>
+                        <button class="send-button" title="Send Message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="news-section">
+            <div class="news-container">
+            <h2 class="section-title">Latest Cybersecurity News</h2>
+                <div id="news-grid" class="news-grid">
+                    <!-- Loading spinner -->
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Loading latest news...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="notes-section">
+            <h2 class="section-title">Study Notes</h2>
+            <div class="notes-grid">
+                <div class="note-card">
+                    <div class="note-header">
+                        <span class="note-category">Networking</span>
+                        <h3 class="note-title">Network Security Fundamentals</h3>
+                    </div>
+                    <p class="note-description">Comprehensive guide covering network protocols, security measures, and best practices for network protection.</p>
+                    <div class="note-meta">
+                        <span class="note-price">Free</span>
+                        <div class="note-actions">
+                            <button class="preview-btn">Preview</button>
+                            <button class="purchase-btn">Download</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note-card">
+                    <div class="note-header">
+                        <span class="note-category">Pentesting</span>
+                        <h3 class="note-title">Ethical Hacking Guide</h3>
+                    </div>
+                    <p class="note-description">Step-by-step guide to ethical hacking techniques and penetration testing methodologies.</p>
+                    <div class="note-meta">
+                        <span class="note-price">Free</span>
+                        <div class="note-actions">
+                            <button class="preview-btn">Preview</button>
+                            <button class="purchase-btn">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cybersecurity Blog Section -->
+        <section id="blog" class="blog-section">
+            <div class="news-container">
+            <h2 class="section-title">Cybersecurity Blog</h2>
+                <div id="blog-grid" class="news-grid">
+                    <!-- Blog Post 1 -->
+                    <div class="news-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1581091870627-3f9b5d1c1f1b" alt="Cryptography" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b'">
+                        </div>
+                        <div class="card-content">
+                            <span class="topic-badge">Cryptography</span>
+                            <h3 class="card-title">The Art of Securing Secrets</h3>
+                            <p class="card-description">Explore the fascinating world of cryptography and how it protects our digital secrets.</p>
+                            <div class="card-meta">
+                                <span class="publish-date">Apr 10, 2025</span>
+                                <span class="source">Your Blog</span>
+                            </div>
+                            <a href="/static/blogs/cryptography.pdf" class="read-more-btn" download>Download Article</a>
+                        </div>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="news-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9" alt="Malware Analysis" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b'">
+                        </div>
+                        <div class="card-content">
+                            <span class="topic-badge">Malware</span>
+                            <h3 class="card-title">Dissecting Digital Threats</h3>
+                            <p class="card-description">Learn how malware analysis helps in understanding and mitigating digital threats.</p>
+                            <div class="card-meta">
+                                <span class="publish-date">Apr 10, 2025</span>
+                                <span class="source">Your Blog</span>
+                            </div>
+                            <a href="/static/blogs/malware_analysis.pdf" class="read-more-btn" download>Download Article</a>
+                        </div>
+                    </div>
+                    <!-- Blog Post 3 -->
+                    <div class="news-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Network Security" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b'">
+                        </div>
+                        <div class="card-content">
+                            <span class="topic-badge">Network Security</span>
+                            <h3 class="card-title">Defending the Digital Highways</h3>
+                            <p class="card-description">Discover strategies and tools for protecting network infrastructures from cyber threats.</p>
+                            <div class="card-meta">
+                                <span class="publish-date">Apr 10, 2025</span>
+                                <span class="source">Your Blog</span>
+                            </div>
+                            <a href="/static/blogs/network_security.pdf" class="read-more-btn" download>Download Article</a>
+                        </div>
+                    </div>
+                    <!-- Blog Post 4 -->
+                    <div class="news-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="Penetration Testing" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b'">
+                        </div>
+                        <div class="card-content">
+                            <span class="topic-badge">Penetration Testing</span>
+                            <h3 class="card-title">Securing the Digital Frontier</h3>
+                            <p class="card-description">Learn about the power of penetration testing in identifying and mitigating security vulnerabilities.</p>
+                            <div class="card-meta">
+                                <span class="publish-date">Apr 10, 2025</span>
+                                <span class="source">Your Blog</span>
+                            </div>
+                            <a href="/static/blogs/penetration_testing.pdf" class="read-more-btn" download>Download Article</a>
+                </div>
+                    </div>
+                    <!-- Blog Post 5 -->
+                    <div class="news-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1526378720917-6c2b3abe5a6e" alt="Web Application Security" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b'">
+                        </div>
+                        <div class="card-content">
+                            <span class="topic-badge">Web Security</span>
+                            <h3 class="card-title">Securing the Online Realm</h3>
+                            <p class="card-description">Explore techniques for securing web applications against common vulnerabilities and attacks.</p>
+                            <div class="card-meta">
+                                <span class="publish-date">Apr 10, 2025</span>
+                                <span class="source">Your Blog</span>
+                            </div>
+                            <a href="/static/blogs/web_security.pdf" class="read-more-btn" download>Download Article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Model Viewer -->
+        <spline-viewer url="https://prod.spline.design/xHsE4Hlkb71yWUbX/scene.splinecode" style="width: 100%; height: 500px;"></spline-viewer>
+
+        <!-- Footer Section -->
+        <footer id="footer" class="footer-section">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 Your Website. All rights reserved.</p>
+                    <p>Contact: info@yourwebsite.com</p>
+                    <p>Address: Gurgram, Haryana</p>
+                </div>
+                <div class="footer-center">
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#news" class="footer-link">News</a>
+                    <a href="#blog" class="footer-link">Blog</a>
+                    <a href="#footer" class="footer-link">About</a>
+                </div>
+                <div class="footer-right">
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <!-- Add Toggle Theme Button -->
+            <div id="theme-toggle-footer" class="theme-toggle">
+                <i class="fas fa-moon"></i> | 
+                <i class="fas fa-sun"></i> | 
+                <i class="fas fa-desktop"></i>
+            </div>
+        </footer>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/buttons.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- Include Spline Viewer Script -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+
+    <script>
+
+        // Chat functionality
+        const chatMessages = document.querySelector('.chat-messages');
+        const chatInput = document.querySelector('.chat-input');
+        const sendButton = document.querySelector('.send-button');
+        const clearButton = document.querySelector('[data-action="CLEAR"]');
+
+        // Add welcome message
+        function addWelcomeMessage() {
+            const welcomeMessage = `
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <p>👋 Welcome to CyberSec Assistant v2.0!</p>
+                        <p>I'm here to help you with all things cybersecurity. You can:</p>
+                        <ul>
+                            <li>Ask questions about security concepts</li>
+                            <li>Get help with security tools</li>
+                            <li>Learn about best practices</li>
+                            <li>Discuss current security trends</li>
+                        </ul>
+                        <p>Try asking me something!</p>
+                    </div>
+                </div>
+            `;
+            chatMessages.innerHTML = welcomeMessage;
+        }
+
+        // Add message to chat
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Handle quick commands
+        document.querySelectorAll('.command-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const command = button.getAttribute('data-command');
+                chatInput.value = command;
+                sendMessage();
+            });
+        });
+
+        // Clear chat
+        clearButton.addEventListener('click', () => {
+            chatMessages.innerHTML = '';
+            addWelcomeMessage();
+        });
+
+        // Send message
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true);
+            chatInput.value = '';
+            sendButton.disabled = true;
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                addMessage(data.response);
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage("Hmm… I couldn't reach the brain. Try again in a sec.");
+            } finally {
+                sendButton.disabled = false;
+            }
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initialize welcome message
+        addWelcomeMessage();
+
+        // Typing animation for welcome message
+        const text = "Welcome to H4ckKai";
+        let index = 0;
+        const speed = 100; // Adjust speed as needed
+
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typing-title").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // Initialize typing animation when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter();
+        });
+
+        // News update functionality
+        const newsGrid = document.getElementById('news-grid');
+        let lastUpdate = null;
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function createNewsCard(article) {
+            return `
+                <div class="news-card">
+                    <div class="card-image">
+                        <img src="${article.image}" alt="${article.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b'">
+                    </div>
+                    <div class="card-content">
+                        <span class="topic-badge">${article.topic}</span>
+                        <h3 class="card-title">${article.title}</h3>
+                        <p class="card-description">${article.description}</p>
+                        <div class="card-meta">
+                            <span class="publish-date">${formatDate(article.published_at)}</span>
+                            <span class="source">${article.source}</span>
+                        </div>
+                        <a href="${article.url}" class="read-more-btn" target="_blank" rel="noopener noreferrer">Read Full Article</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function fetchNews() {
+            try {
+                const response = await fetch('/api/news');
+                const data = await response.json();
+                
+                if (data.success && data.articles.length > 0) {
+                    // Clear loading spinner
+                    newsGrid.innerHTML = '';
+                    
+                    // Add news cards
+                    data.articles.forEach(article => {
+                        newsGrid.innerHTML += createNewsCard(article);
+                    });
+                    
+                    lastUpdate = new Date();
+                    updateLastUpdateTime();
+                } else {
+                    throw new Error('No articles found');
+                }
+            } catch (error) {
+                newsGrid.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Failed to load news. Please try again.</p>
+                        <button onclick="fetchNews()" class="retry-btn">Retry</button>
+                    </div>
+                `;
+            }
+        }
+
+        function updateLastUpdateTime() {
+            const updateTimeElement = document.getElementById('last-update-time');
+            if (updateTimeElement && lastUpdate) {
+                updateTimeElement.textContent = `Last updated: ${lastUpdate.toLocaleTimeString()}`;
+            }
+        }
+
+        // Fetch news immediately and then every 5 minutes
+        fetchNews();
+        setInterval(fetchNews, 300000); // 5 minutes in milliseconds
+
+        // Add some additional styles
+        const additionalStyles = document.createElement('style');
+        additionalStyles.textContent = `
+            .topic-badge {
+                display: inline-block;
+                padding: 4px 8px;
+                background: #e3f2fd;
+                color: #1976d2;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+            }
+            
+            .last-update-info {
+                text-align: center;
+                color: #666;
+                font-size: 0.9rem;
+                margin-top: 1rem;
+            }
+
+            .typing-effect {
+                display: inline-block;
+                border-right: 2px solid #42DCA3;
+                animation: blink 0.7s step-end infinite, glow 1.5s ease-in-out infinite alternate;
+                white-space: nowrap;
+                overflow: hidden;
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 2rem; /* Adjust size as needed */
+                color: #42DCA3;
+            }
+
+            @keyframes blink {
+                from, to { border-color: transparent; }
+                50% { border-color: #42DCA3; }
+            }
+
+            @keyframes glow {
+                from { text-shadow: 0 0 5px #42DCA3, 0 0 10px #42DCA3, 0 0 15px #42DCA3; }
+                to { text-shadow: 0 0 20px #42DCA3, 0 0 30px #42DCA3, 0 0 40px #42DCA3; }
+            }
+
+            .button {
+                transition: background-color 0.3s ease;
+            }
+
+            #background-model {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 1; /* Lower z-index for background */
+                opacity: 0.5; /* Adjust transparency if needed */
+            }
+
+            .chatbot-container {
+                position: relative;
+                z-index: 2; /* Higher z-index for UI elements */
+                /* Ensure no blur effect */
+            }
+
+            #theme-toggle {
+                position: fixed; /* Keeps it in a fixed position */
+                top: 60px;       /* Adjust based on your navbar height */
+                right: 20px;     /* Position it at the right corner */
+                z-index: 100;    /* Ensure it appears above other elements */
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .theme-toggle {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 200px;
+                margin: 20px auto;
+                padding: 10px;
+                background-color: #333;
+                color: #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                font-size: 1.5rem;
+            }
+
+            .theme-toggle i {
+                margin: 0 10px;
+                transition: color 0.3s ease, transform 0.3s ease;
+            }
+
+            .theme-toggle i:hover {
+                color: #42DCA3;
+                transform: scale(1.2);
+            }
+
+            .theme-toggle span {
+                color: #fff;
+                font-size: 1.5rem;
+            }
+        `;
+        document.head.appendChild(additionalStyles);
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('3d-model-container').appendChild(renderer.domElement);
+
+        // Load 3D model
+        const loader = new THREE.GLTFLoader();
+        loader.load('path/to/your/model.glb', function(gltf) {
+            scene.add(gltf.scene);
+            renderer.render(scene, camera);
+        });
+
+        // Camera position
+        camera.position.z = 5;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+
+
+        document.getElementById('theme-toggle-footer').addEventListener('click', (event) => {
+            const target = event.target;
+            let newTheme;
+
+            if (target.classList.contains('fa-moon')) {
+                newTheme = 'dark-theme';
+            } else if (target.classList.contains('fa-sun')) {
+                newTheme = 'light-theme';
+            } else if (target.classList.contains('fa-desktop')) {
+                newTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark-theme' : 'light-theme';
+            }
+
+            if (newTheme) {
+                document.body.classList.remove('light-theme', 'dark-theme');
+                document.body.classList.add(newTheme);
+                localStorage.setItem('theme', newTheme);
+            }
+        });
+    </script>
+
+    <style>
+    .footer-section {
+        background: #000000;
+        color: #b4b4c7;
+        padding: 30px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .footer-left p {
+        margin: 5px 0;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.9rem;
+        color: #b4b4c7;
+    }
+
+    .footer-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-link {
+        color: #b4b4c7;
+        margin: 5px 0;
+        text-decoration: none;
+        font-family: 'Share Tech Mono', monospace;
+        transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+        color: #42DCA3;
+    }
+
+    .footer-right a {
+        color: #b4b4c7;
+        margin: 0 15px;
+        font-size: 1.5rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-right a:hover {
+        color: #42DCA3;
+        transform: scale(1.1);
+    }
+
+    /* Light Theme Adjustments */
+    .light-theme .chatbot-container {
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    .light-theme .chat-input {
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #ccc;
+    }
+
+    .light-theme .send-button {
+        background-color: #42DCA3;
+        color: #fff;
+    }
+
+    .light-theme .command-button {
+        background-color: #e0e0e0;
+        color: #333;
+    }
+
+    .light-theme .message.user-message {
+        background-color: #e0f7fa;
+        color: #00796b;
+    }
+
+    .light-theme .message.bot-message {
+        background-color: #e3f2fd;
+        color: #1976d2;
+    }
+
+    body.light-theme {
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    body.dark-theme {
+        background-color: #121212;
+        color: #f9f9f9;
+    }
+
+    /* Add more styles for other elements as needed */
+    @media (max-width: 768px) {
+      /* Styles for smaller screens */
+    }
+
+    .container {
+      width: 80%;
+      font-size: 1em;
+    }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Your Site Name",
+      "url": "https://www.yoursite.com"
+    }
+    </script>
+</body>
+</html>
